@@ -37,11 +37,17 @@ def test_fit_runs_more_than_one_iteration():
     Well-separated blobs need more than one E/M step to find their true
     centers; a single assignment+update from a random init should not
     already be within `tol` of converged.
+
+    Uses kmeans++ init (seeded for determinism): plain random init has no
+    protection against a bad draw landing two initial centroids in the same
+    blob, which gets stuck in a local minimum independent of this test's
+    regression target -- that's not this test's concern.
     """
     X = _three_blob_data(seed=0)
     true_centers = np.array([[0, 0], [10, 10], [10, 0]])
 
-    km = KMeans(n_clusters=3, max_iter=50, tol=1e-4, init_method="random")
+    np.random.seed(0)
+    km = KMeans(n_clusters=3, max_iter=50, tol=1e-4, init_method="kmeans++")
     km.fit(X)
 
     # each recovered centroid should land near one of the true blob centers
