@@ -8,6 +8,8 @@ Import from here for convenience, e.g.:
 
 from vectordb.index.base import VectorIndex
 from vectordb.index.flat import FlatIndex
+from vectordb.index.hnsw import HNSWIndex
 from vectordb.index.ivf import IVFIndex
+from vectordb.index.pq import PQIndex
 
-__all__ = ["VectorIndex", "FlatIndex", "IVFIndex"]
+__all__ = ["VectorIndex", "FlatIndex", "IVFIndex", "PQIndex", "HNSWIndex"]
