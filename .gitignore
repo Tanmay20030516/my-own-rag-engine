@@ -1,0 +1,5 @@
+dump/
+__pycache__/
+.venv
+plan.md
+.pytest_cache/
