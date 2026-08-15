@@ -1,0 +1,1078 @@
+{
+  "meta": {
+    "corpus": "Pride and Prejudice (Project Gutenberg #1342)",
+    "embed_model": "nomic-embed-text",
+    "max_sentences": 1,
+    "n_chunks_raw": 5942,
+    "n_chunks_deduped": 5663,
+    "n_indexed": 5363,
+    "n_queries": 300,
+    "dim": 768,
+    "k": 10,
+    "seed": 0,
+    "defaults": {
+      "ivf": {
+        "nlist": 64,
+        "nprobe": 8
+      },
+      "pq": {
+        "M": 8,
+        "Ks": 64
+      },
+      "hnsw": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 50
+      }
+    }
+  },
+  "records": [
+    {
+      "family": "flat",
+      "impl": "ours",
+      "sweep": "default",
+      "params": {},
+      "recall": 1.0,
+      "build_s": 9.291994501836598e-06,
+      "search_ms": 3.2820070833258796,
+      "memory_mb": 31.464744567871094
+    },
+    {
+      "family": "flat",
+      "impl": "faiss",
+      "sweep": "default",
+      "params": {},
+      "recall": 1.0,
+      "build_s": 0.002201833005528897,
+      "search_ms": 0.2181527799984906,
+      "memory_mb": 15.711956977844238
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 1
+      },
+      "recall": 0.4690000000000001,
+      "build_s": 0.4104825419926783,
+      "search_ms": 0.1373098633484915,
+      "memory_mb": 32.034549713134766
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 1
+      },
+      "recall": 0.48566666666666664,
+      "build_s": 0.015791917001479305,
+      "search_ms": 0.013695969973923638,
+      "memory_mb": 15.940951347351074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 2
+      },
+      "recall": 0.623,
+      "build_s": 0.4104825419926783,
+      "search_ms": 0.2615776367019862,
+      "memory_mb": 32.034549713134766
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 2
+      },
+      "recall": 0.63,
+      "build_s": 0.015791917001479305,
+      "search_ms": 0.014876526644608628,
+      "memory_mb": 15.940951347351074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 4
+      },
+      "recall": 0.736,
+      "build_s": 0.4104825419926783,
+      "search_ms": 0.519787499991556,
+      "memory_mb": 32.034549713134766
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 4
+      },
+      "recall": 0.7503333333333334,
+      "build_s": 0.015791917001479305,
+      "search_ms": 0.025450139995276306,
+      "memory_mb": 15.940951347351074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 8
+      },
+      "recall": 0.8383333333333334,
+      "build_s": 0.4104825419926783,
+      "search_ms": 0.9755373633136817,
+      "memory_mb": 32.034549713134766
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 8
+      },
+      "recall": 0.8446666666666667,
+      "build_s": 0.015791917001479305,
+      "search_ms": 0.04124500002944842,
+      "memory_mb": 15.940951347351074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 16
+      },
+      "recall": 0.9210000000000003,
+      "build_s": 0.4104825419926783,
+      "search_ms": 1.580956526643907,
+      "memory_mb": 32.034549713134766
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 16
+      },
+      "recall": 0.9176666666666667,
+      "build_s": 0.015791917001479305,
+      "search_ms": 0.07302013667261538,
+      "memory_mb": 15.940951347351074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 32
+      },
+      "recall": 0.9736666666666668,
+      "build_s": 0.4104825419926783,
+      "search_ms": 4.3472369433341855,
+      "memory_mb": 32.034549713134766
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 32
+      },
+      "recall": 0.9740000000000002,
+      "build_s": 0.015791917001479305,
+      "search_ms": 0.13177374998728433,
+      "memory_mb": 15.940951347351074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 64
+      },
+      "recall": 1.0,
+      "build_s": 0.4104825419926783,
+      "search_ms": 7.557470696629025,
+      "memory_mb": 32.034549713134766
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nprobe",
+      "params": {
+        "nlist": 64,
+        "nprobe": 64
+      },
+      "recall": 1.0,
+      "build_s": 0.015791917001479305,
+      "search_ms": 0.23140264000782432,
+      "memory_mb": 15.940951347351074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 16,
+        "nprobe": 8
+      },
+      "recall": 0.9563333333333333,
+      "build_s": 0.3565108749899082,
+      "search_ms": 4.484838053322164,
+      "memory_mb": 31.747318267822266
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 16,
+        "nprobe": 8
+      },
+      "recall": 0.9516666666666667,
+      "build_s": 0.013448791010887362,
+      "search_ms": 0.12837875003848848,
+      "memory_mb": 15.799960136413574
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 32,
+        "nprobe": 8
+      },
+      "recall": 0.88,
+      "build_s": 0.41386804200010374,
+      "search_ms": 1.5529273599774267,
+      "memory_mb": 31.842708587646484
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 32,
+        "nprobe": 8
+      },
+      "recall": 0.891,
+      "build_s": 0.01211199999670498,
+      "search_ms": 0.0736481933563482,
+      "memory_mb": 15.846957206726074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 64,
+        "nprobe": 8
+      },
+      "recall": 0.8383333333333334,
+      "build_s": 0.40282166699762456,
+      "search_ms": 0.9855688899794283,
+      "memory_mb": 32.034549713134766
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 64,
+        "nprobe": 8
+      },
+      "recall": 0.8446666666666667,
+      "build_s": 0.014322499991976656,
+      "search_ms": 0.04139805668576931,
+      "memory_mb": 15.940951347351074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 128,
+        "nprobe": 8
+      },
+      "recall": 0.8046666666666666,
+      "build_s": 0.7711115410056664,
+      "search_ms": 0.5710086100346718,
+      "memory_mb": 32.418270111083984
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 128,
+        "nprobe": 8
+      },
+      "recall": 0.7953333333333334,
+      "build_s": 0.018928083998616785,
+      "search_ms": 0.02916402668536951,
+      "memory_mb": 16.128939628601074
+    },
+    {
+      "family": "ivf",
+      "impl": "ours",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 256,
+        "nprobe": 8
+      },
+      "recall": 0.7529999999999999,
+      "build_s": 1.2294068329938455,
+      "search_ms": 0.4378652766657372,
+      "memory_mb": 33.18503189086914
+    },
+    {
+      "family": "ivf",
+      "impl": "faiss",
+      "sweep": "nlist",
+      "params": {
+        "nlist": 256,
+        "nprobe": 8
+      },
+      "recall": 0.735,
+      "build_s": 0.02545983300660737,
+      "search_ms": 0.02770194667391479,
+      "memory_mb": 16.504916191101074
+    },
+    {
+      "family": "pq",
+      "impl": "ours",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 16
+      },
+      "recall": 0.12300000000000001,
+      "build_s": 0.2751368330063997,
+      "search_ms": 0.2606145833366706,
+      "memory_mb": 0.1755828857421875
+    },
+    {
+      "family": "pq",
+      "impl": "faiss",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 16
+      },
+      "recall": 0.12133333333333333,
+      "build_s": 0.050623874994926155,
+      "search_ms": 0.4885240266836869,
+      "memory_mb": 0.06741523742675781
+    },
+    {
+      "family": "pq",
+      "impl": "faiss-ip",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 16
+      },
+      "recall": 0.085,
+      "build_s": 0.054214000003412366,
+      "search_ms": 0.03678875000332482,
+      "memory_mb": 0.06741523742675781
+    },
+    {
+      "family": "pq",
+      "impl": "ours",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 32
+      },
+      "recall": 0.16633333333333336,
+      "build_s": 0.4065190410037758,
+      "search_ms": 0.2889083333138842,
+      "memory_mb": 0.2693328857421875
+    },
+    {
+      "family": "pq",
+      "impl": "faiss",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 32
+      },
+      "recall": 0.154,
+      "build_s": 0.08628825000778306,
+      "search_ms": 0.4933709733207555,
+      "memory_mb": 0.11940479278564453
+    },
+    {
+      "family": "pq",
+      "impl": "faiss-ip",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 32
+      },
+      "recall": 0.12066666666666667,
+      "build_s": 0.08403904100123327,
+      "search_ms": 0.04080152997630648,
+      "memory_mb": 0.11940479278564453
+    },
+    {
+      "family": "pq",
+      "impl": "ours",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 64
+      },
+      "recall": 0.20833333333333334,
+      "build_s": 0.5794652079930529,
+      "search_ms": 0.3216849999929158,
+      "memory_mb": 0.4568328857421875
+    },
+    {
+      "family": "pq",
+      "impl": "faiss",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 64
+      },
+      "recall": 0.20700000000000002,
+      "build_s": 0.0960542910033837,
+      "search_ms": 0.5030183333534902,
+      "memory_mb": 0.21826934814453125
+    },
+    {
+      "family": "pq",
+      "impl": "faiss-ip",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 64
+      },
+      "recall": 0.15466666666666667,
+      "build_s": 0.09496858299826272,
+      "search_ms": 0.05035222333390266,
+      "memory_mb": 0.21826934814453125
+    },
+    {
+      "family": "pq",
+      "impl": "ours",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 128
+      },
+      "recall": 0.2740000000000001,
+      "build_s": 1.0031739580008434,
+      "search_ms": 0.343592363302984,
+      "memory_mb": 0.8318328857421875
+    },
+    {
+      "family": "pq",
+      "impl": "faiss",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 128
+      },
+      "recall": 0.2643333333333333,
+      "build_s": 0.15521929200622253,
+      "search_ms": 0.5053738899975239,
+      "memory_mb": 0.41088390350341797
+    },
+    {
+      "family": "pq",
+      "impl": "faiss-ip",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 128
+      },
+      "recall": 0.23633333333333334,
+      "build_s": 0.1537554579990683,
+      "search_ms": 0.05701860999882532,
+      "memory_mb": 0.41088390350341797
+    },
+    {
+      "family": "pq",
+      "impl": "ours",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 256
+      },
+      "recall": 0.3283333333333333,
+      "build_s": 1.6942345419956837,
+      "search_ms": 0.36274333334101055,
+      "memory_mb": 1.5818328857421875
+    },
+    {
+      "family": "pq",
+      "impl": "faiss",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 256
+      },
+      "recall": 0.322,
+      "build_s": 0.3038568330084672,
+      "search_ms": 0.4757006933505181,
+      "memory_mb": 0.7909984588623047
+    },
+    {
+      "family": "pq",
+      "impl": "faiss-ip",
+      "sweep": "Ks",
+      "params": {
+        "M": 8,
+        "Ks": 256
+      },
+      "recall": 0.2796666666666667,
+      "build_s": 0.29885754200222436,
+      "search_ms": 0.018435833335388452,
+      "memory_mb": 0.7909984588623047
+    },
+    {
+      "family": "pq",
+      "impl": "ours",
+      "sweep": "M",
+      "params": {
+        "M": 4,
+        "Ks": 64
+      },
+      "recall": 0.148,
+      "build_s": 0.6880857080104761,
+      "search_ms": 0.21044597335276194,
+      "memory_mb": 0.4363746643066406
+    },
+    {
+      "family": "pq",
+      "impl": "faiss",
+      "sweep": "M",
+      "params": {
+        "M": 4,
+        "Ks": 64
+      },
+      "recall": 0.12400000000000001,
+      "build_s": 0.06394420898868702,
+      "search_ms": 0.2608477766625583,
+      "memory_mb": 0.2029256820678711
+    },
+    {
+      "family": "pq",
+      "impl": "faiss-ip",
+      "sweep": "M",
+      "params": {
+        "M": 4,
+        "Ks": 64
+      },
+      "recall": 0.11166666666666666,
+      "build_s": 0.06041033400106244,
+      "search_ms": 0.03028833331579032,
+      "memory_mb": 0.2029256820678711
+    },
+    {
+      "family": "pq",
+      "impl": "ours",
+      "sweep": "M",
+      "params": {
+        "M": 8,
+        "Ks": 64
+      },
+      "recall": 0.20833333333333334,
+      "build_s": 0.5776939580100589,
+      "search_ms": 0.30342347333013703,
+      "memory_mb": 0.4568328857421875
+    },
+    {
+      "family": "pq",
+      "impl": "faiss",
+      "sweep": "M",
+      "params": {
+        "M": 8,
+        "Ks": 64
+      },
+      "recall": 0.20700000000000002,
+      "build_s": 0.113884833001066,
+      "search_ms": 0.506586803336783,
+      "memory_mb": 0.21826934814453125
+    },
+    {
+      "family": "pq",
+      "impl": "faiss-ip",
+      "sweep": "M",
+      "params": {
+        "M": 8,
+        "Ks": 64
+      },
+      "recall": 0.15466666666666667,
+      "build_s": 0.11157350000576116,
+      "search_ms": 0.050575416680658236,
+      "memory_mb": 0.21826934814453125
+    },
+    {
+      "family": "pq",
+      "impl": "ours",
+      "sweep": "M",
+      "params": {
+        "M": 16,
+        "Ks": 64
+      },
+      "recall": 0.3006666666666667,
+      "build_s": 0.6934565420087893,
+      "search_ms": 0.5090662499909133,
+      "memory_mb": 0.49774932861328125
+    },
+    {
+      "family": "pq",
+      "impl": "faiss",
+      "sweep": "M",
+      "params": {
+        "M": 16,
+        "Ks": 64
+      },
+      "recall": 0.29333333333333333,
+      "build_s": 0.19881095799792092,
+      "search_ms": 0.999420416628709,
+      "memory_mb": 0.24895668029785156
+    },
+    {
+      "family": "pq",
+      "impl": "faiss-ip",
+      "sweep": "M",
+      "params": {
+        "M": 16,
+        "Ks": 64
+      },
+      "recall": 0.24366666666666664,
+      "build_s": 0.19802333299594466,
+      "search_ms": 0.08353666669184652,
+      "memory_mb": 0.24895668029785156
+    },
+    {
+      "family": "pq",
+      "impl": "ours",
+      "sweep": "M",
+      "params": {
+        "M": 32,
+        "Ks": 64
+      },
+      "recall": 0.44033333333333324,
+      "build_s": 0.7557261249894509,
+      "search_ms": 0.8590069466542142,
+      "memory_mb": 0.5795822143554688
+    },
+    {
+      "family": "pq",
+      "impl": "faiss",
+      "sweep": "M",
+      "params": {
+        "M": 32,
+        "Ks": 64
+      },
+      "recall": 0.4256666666666667,
+      "build_s": 0.5373974999965867,
+      "search_ms": 1.93933069332464,
+      "memory_mb": 0.3103313446044922
+    },
+    {
+      "family": "pq",
+      "impl": "faiss-ip",
+      "sweep": "M",
+      "params": {
+        "M": 32,
+        "Ks": 64
+      },
+      "recall": 0.357,
+      "build_s": 0.3646127910033101,
+      "search_ms": 0.16070236000814475,
+      "memory_mb": 0.3103313446044922
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 10
+      },
+      "recall": 0.8360000000000001,
+      "build_s": 20.5037008329964,
+      "search_ms": 0.43751555334893055,
+      "memory_mb": 37.2190055847168
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 10
+      },
+      "recall": 0.8306666666666667,
+      "build_s": 0.15603629100951366,
+      "search_ms": 0.028918193371888872,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 20
+      },
+      "recall": 0.91,
+      "build_s": 20.5037008329964,
+      "search_ms": 0.8000680567056406,
+      "memory_mb": 37.2190055847168
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 20
+      },
+      "recall": 0.9256666666666666,
+      "build_s": 0.15603629100951366,
+      "search_ms": 0.03330166665061066,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9683333333333335,
+      "build_s": 20.5037008329964,
+      "search_ms": 1.4107577800071642,
+      "memory_mb": 37.2190055847168
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9866666666666667,
+      "build_s": 0.15603629100951366,
+      "search_ms": 0.060756389963595815,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 100
+      },
+      "recall": 0.99,
+      "build_s": 20.5037008329964,
+      "search_ms": 2.5186933333558654,
+      "memory_mb": 37.2190055847168
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 100
+      },
+      "recall": 0.9970000000000001,
+      "build_s": 0.15603629100951366,
+      "search_ms": 0.1037219433055725,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 200
+      },
+      "recall": 0.9983333333333333,
+      "build_s": 20.5037008329964,
+      "search_ms": 4.288131386662523,
+      "memory_mb": 37.2190055847168
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 200
+      },
+      "recall": 1.0,
+      "build_s": 0.15603629100951366,
+      "search_ms": 0.18275652997544967,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 400
+      },
+      "recall": 0.9990000000000001,
+      "build_s": 20.5037008329964,
+      "search_ms": 7.177480276683733,
+      "memory_mb": 37.2190055847168
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_search",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 400
+      },
+      "recall": 1.0,
+      "build_s": 0.15603629100951366,
+      "search_ms": 0.3295004166526875,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "M",
+      "params": {
+        "M": 8,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9033333333333333,
+      "build_s": 14.792650791001506,
+      "search_ms": 1.0977395833469927,
+      "memory_mb": 35.047760009765625
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "M",
+      "params": {
+        "M": 8,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9470000000000001,
+      "build_s": 0.13097079200088046,
+      "search_ms": 0.039216806665839,
+      "memory_mb": 16.124319076538086
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "M",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9683333333333335,
+      "build_s": 23.819515708994004,
+      "search_ms": 1.5700623599695973,
+      "memory_mb": 37.2190055847168
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "M",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9856666666666668,
+      "build_s": 0.15514287499536294,
+      "search_ms": 0.055885696686649076,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "M",
+      "params": {
+        "M": 32,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9916666666666667,
+      "build_s": 31.581569875008427,
+      "search_ms": 2.409534166654339,
+      "memory_mb": 41.69614791870117
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "M",
+      "params": {
+        "M": 32,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9920000000000001,
+      "build_s": 0.16025366699614096,
+      "search_ms": 0.06321486333035864,
+      "memory_mb": 17.10114097595215
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_construction",
+      "params": {
+        "M": 16,
+        "ef_construction": 50,
+        "ef_search": 50
+      },
+      "recall": 0.9610000000000001,
+      "build_s": 9.00707666600647,
+      "search_ms": 1.2062097200153707,
+      "memory_mb": 37.19828414916992
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_construction",
+      "params": {
+        "M": 16,
+        "ef_construction": 50,
+        "ef_search": 50
+      },
+      "recall": 0.965,
+      "build_s": 0.05624212499242276,
+      "search_ms": 0.04690763666682566,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_construction",
+      "params": {
+        "M": 16,
+        "ef_construction": 100,
+        "ef_search": 50
+      },
+      "recall": 0.9666666666666667,
+      "build_s": 14.404994458003785,
+      "search_ms": 1.1865952766675036,
+      "memory_mb": 37.212486267089844
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_construction",
+      "params": {
+        "M": 16,
+        "ef_construction": 100,
+        "ef_search": 50
+      },
+      "recall": 0.9806666666666666,
+      "build_s": 0.10212470800615847,
+      "search_ms": 0.055316526704700664,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_construction",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9683333333333335,
+      "build_s": 16.873150999992504,
+      "search_ms": 1.0655041666662632,
+      "memory_mb": 37.2190055847168
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_construction",
+      "params": {
+        "M": 16,
+        "ef_construction": 200,
+        "ef_search": 50
+      },
+      "recall": 0.9843333333333336,
+      "build_s": 0.14731316700635944,
+      "search_ms": 0.05400138999296662,
+      "memory_mb": 16.448392868041992
+    },
+    {
+      "family": "hnsw",
+      "impl": "ours",
+      "sweep": "ef_construction",
+      "params": {
+        "M": 16,
+        "ef_construction": 400,
+        "ef_search": 50
+      },
+      "recall": 0.9686666666666668,
+      "build_s": 25.0620328750083,
+      "search_ms": 1.2560438866785262,
+      "memory_mb": 37.22120666503906
+    },
+    {
+      "family": "hnsw",
+      "impl": "faiss",
+      "sweep": "ef_construction",
+      "params": {
+        "M": 16,
+        "ef_construction": 400,
+        "ef_search": 50
+      },
+      "recall": 0.9840000000000001,
+      "build_s": 0.24753475000034086,
+      "search_ms": 0.05683722333439315,
+      "memory_mb": 16.448392868041992
+    }
+  ]
+}

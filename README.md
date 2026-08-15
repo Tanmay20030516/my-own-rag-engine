@@ -20,6 +20,8 @@ A vector database implemented from scratch in Python (numpy only, no FAISS/sklea
 | `rag/pipeline.py` — `RAGPipeline` (index docs → query → local LLM)                 | done                                      |
 | `examples/basic_search.py` — benchmark vs. faiss (recall, build/search time, memory) | done                                      |
 | `examples/real_search.py` — same benchmark on real sentence embeddings             | done                                      |
+| `examples/sweep.py` + `examples/plots.py` — hyperparameter sweep, figures, tables    | done                                      |
+| [`report.md`](report.md) / [`report.pdf`](report.pdf) — full benchmark write-up      | done                                      |
 
 ## Setup
 
@@ -134,6 +136,27 @@ defect. HNSW's build time is the one place with a structural, not just
 tunable, gap vs. faiss: it's a pure per-node incremental graph build, which
 doesn't vectorize the way k-means-based training does, so it scales the way
 a pure-Python loop scales rather than the way a C++ implementation does.
+
+## Report
+
+[`report.md`](report.md) (and [`report.pdf`](report.pdf)) is the full write-up:
+79 configurations sweeping `nprobe`/`nlist`, `M`/`Ks`, and
+`M`/`ef_construction`/`ef_search`, ours vs. faiss, with detailed tables and six
+figures under [`plots/`](plots/). Highlights: every exact configuration scores
+precisely 1.000 on both sides; recall tracks faiss within 0.02 almost everywhere;
+for PQ, `M=32, Ks=64` beats `M=8, Ks=256` on recall *and* memory simultaneously.
+
+```bash
+PYTHONPATH=.:examples python examples/sweep.py    # -> sweep_results.json
+PYTHONPATH=.:examples python examples/plots.py    # -> plots/*.png, plots/tables.md
+```
+
+To rebuild the PDF from `report.md` (needs a LaTeX install providing `xelatex`):
+
+```bash
+python -c "import pypandoc; pypandoc.convert_file('report.md','pdf',outputfile='report.pdf',\
+extra_args=['--pdf-engine=xelatex','--variable=geometry:margin=1.6cm','--toc'])"
+```
 
 ## Tests
 

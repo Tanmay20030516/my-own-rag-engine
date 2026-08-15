@@ -24,38 +24,28 @@ the standard equivalent is L2-normalizing vectors and using inner product,
 which is what the faiss side below does.
 """
 
-import json
-import re
-import urllib.request
-from pathlib import Path
-
 import faiss
 import numpy as np
 from bench_utils import bench, bench_faiss, print_row, recall_at_k
-from tqdm import tqdm
+from corpus import dedupe, embed_queries, load_chunks, load_or_embed
 
-from rag.chunker import chunk_sentences
-from rag.embedder import OllamaEmbedder
 from vectordb.index import FlatIndex, HNSWIndex, IVFIndex, PQIndex
 
-DATA_DIR = Path(__file__).parent / "data"
-BOOK_URL = "https://www.gutenberg.org/files/1342/1342-0.txt"
-BOOK_PATH = DATA_DIR / "pride_and_prejudice.txt"
-CACHE_CHUNKS_PATH = DATA_DIR / "pride_and_prejudice_chunks.json"
-CACHE_EMBED_PATH = DATA_DIR / "pride_and_prejudice_embeddings.npy"
-
-START_MARKER = "*** START OF THE PROJECT GUTENBERG EBOOK 1342 ***"
-END_MARKER = "*** END OF THE PROJECT GUTENBERG EBOOK 1342 ***"
+# k-means++ init and HNSW's level assignment both draw from numpy's global RNG,
+# so an unseeded run gives slightly different centroids/graphs -- and therefore
+# slightly different recall -- every time. Seed once so re-running with the same
+# hyperparameters reproduces the same numbers.
+np.random.seed(0)
 
 K = 10
-EMBED_BATCH_SIZE = 200
+MAX_SENTENCES = 3
 
 # sized for a corpus of ~2k chunks -- see README/basic_search.py for why the
 # points-per-cluster ratio matters (faiss itself warns below ~40 points per
 # centroid/codeword; nlist=32 and Ks=32 keep every cluster comfortably above
 # that on a dataset this size)
 IVF_NLIST, IVF_NPROBE = 32, 6
-PQ_M, PQ_KS = 8, 32
+PQ_M, PQ_KS = 8, 64
 HNSW_M, HNSW_EF_CONSTRUCTION, HNSW_EF_SEARCH = 16, 200, 50
 
 QUERIES = [
@@ -74,52 +64,18 @@ QUERIES = [
 ]
 
 
-def _load_chunks() -> list[str]:
-    """Download the book if needed, strip Project Gutenberg's header/footer,
-    collapse whitespace, and split into ~3-sentence chunks."""
-    if not BOOK_PATH.exists():
-        DATA_DIR.mkdir(exist_ok=True)
-        print(f"Downloading {BOOK_URL} ...")
-        urllib.request.urlretrieve(BOOK_URL, BOOK_PATH)
-
-    text = BOOK_PATH.read_text(encoding="utf-8")
-    start = text.find(START_MARKER)
-    end = text.find(END_MARKER)
-    body = text[start:end].split("\n", 1)[1] if start != -1 else text
-    body = re.sub(r"\s+", " ", body)
-    return chunk_sentences(body, max_sentences=3)
-
-
-def _load_or_embed(chunks: list[str]) -> np.ndarray:
-    """Embed all chunks via the local Ollama model, batched, caching to disk
-    so re-running this script doesn't re-embed ~2000 chunks every time."""
-    if CACHE_EMBED_PATH.exists() and CACHE_CHUNKS_PATH.exists():
-        if json.loads(CACHE_CHUNKS_PATH.read_text()) == chunks:
-            return np.load(CACHE_EMBED_PATH)
-
-    embedder = OllamaEmbedder(model="nomic-embed-text")
-    batches = [
-        embedder.embed_documents(chunks[i : i + EMBED_BATCH_SIZE])
-        for i in tqdm(range(0, len(chunks), EMBED_BATCH_SIZE), desc="embedding")
-    ]
-    vectors = np.vstack(batches)
-
-    DATA_DIR.mkdir(exist_ok=True)
-    np.save(CACHE_EMBED_PATH, vectors)
-    CACHE_CHUNKS_PATH.write_text(json.dumps(chunks))
-    return vectors
-
-
 def main() -> None:
-    chunks = _load_chunks()
+    chunks = load_chunks(max_sentences=MAX_SENTENCES)
     print(f"{len(chunks)} chunks from Pride and Prejudice\n")
 
-    vectors = _load_or_embed(chunks)
+    vectors = load_or_embed(chunks, tag=f"pnp_s{MAX_SENTENCES}")
+    # duplicate chunks embed to identical vectors, which makes top-k ties that
+    # two implementations can break differently -- see corpus.dedupe
+    chunks, vectors = dedupe(chunks, vectors)
     ids = np.arange(len(chunks))
     D = vectors.shape[1]
 
-    embedder = OllamaEmbedder(model="nomic-embed-text")
-    queries = np.stack([embedder.embed_query(q) for q in QUERIES])
+    queries = embed_queries(QUERIES)
 
     vectors_f32 = np.ascontiguousarray(vectors, dtype=np.float32)
     queries_f32 = np.ascontiguousarray(queries, dtype=np.float32)
