@@ -72,7 +72,7 @@ class HNSWIndex(VectorIndex):
 
     def _random_level(self) -> int:
         """Exponential-decay level assignment: most nodes land at layer 0, few reach high layers."""
-        return int(math.floor(-math.log(np.random.uniform()) * self._level_mult))
+        return math.floor(-math.log(np.random.uniform()) * self._level_mult)
 
     def _search_layer(
         self, q: np.ndarray, entry_points: list[int], ef: int, layer: int

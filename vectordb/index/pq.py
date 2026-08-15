@@ -30,7 +30,7 @@ from vectordb.kmeans import KMeans
 
 Metric = Literal["l2", "cosine", "ip"]
 
-# subspace distance used to build both the codebooks and the ADC table --
+# subspace distance used to build both the codebooks and the Asymmetric Distance Computation (ADC) table
 # cosine reuses pairwise_l2 because vectors are normalized before splitting
 _SUBSPACE_DIST_FUNCS = {
     "l2": distance.pairwise_l2,
@@ -84,7 +84,7 @@ class PQIndex(VectorIndex):
         self.sub_dim = vectors.shape[1] // self.M
         sub_vectors = self._split(vectors)  # (M, n, sub_dim)
 
-        codebooks = np.empty((self.M, self.Ks, self.sub_dim))
+        codebooks = np.empty((self.M, self.Ks, self.sub_dim)) # type: ignore
         for m in range(self.M):
             km = KMeans(n_clusters=self.Ks, max_iter=200, tol=1e-4)
             km.fit(sub_vectors[m])
@@ -107,12 +107,18 @@ class PQIndex(VectorIndex):
             ids = np.asarray(ids)
             if ids.shape[0] != n:
                 raise ValueError(f"got {n} vectors but {ids.shape[0]} ids")
-
+        # now we encode each vector using the codebook
+        # split the vector into subvectors
         sub_vectors = self._split(vectors)  # (M, n, sub_dim)
         dist_func = _SUBSPACE_DIST_FUNCS[self.metric]
         codes = np.empty((n, self.M), dtype=np.uint8)
         for m in range(self.M):
+            # for every subvector of segment m, find it's distance to the centroids of that segment
+            # sub_vectors[m] is (n, d/m)
+            # self.codebooks[m] is (Ks, d/m)
             dists = dist_func(sub_vectors[m], self.codebooks[m])  # (n, Ks)
+            # for every subvector, we find which centroid it is closest to
+            # so a d dimm vector now gets represented by a M sized code of uint8
             codes[:, m] = np.argmin(dists, axis=1)
 
         if self._codes is None:
@@ -135,18 +141,22 @@ class PQIndex(VectorIndex):
 
         dist_func = _SUBSPACE_DIST_FUNCS[self.metric]
         table = np.empty((self.M, self.Ks))
+        # we just compute how far is sub-vector from each segment centroids
         for m in range(self.M):
             table[m] = dist_func(sub_query[m], self.codebooks[m])[0]  # (Ks,)
 
-        n = self._codes.shape[0]
+        n = self._codes.shape[0] # (n, M)
         k = min(k, n)
 
-        # table[m, codes[:, m]] for every m, summed over m -- approximate
-        # distance for every stored vector without ever touching self._codes
-        # as anything but a lookup index
+        # table[m, codes[:, m]] for every m, summed over m
+        # approximate distance for every stored vector
+        # without ever touching self._codes as anything but a lookup index
+
+        # i.e. now we find the approx distance of sub-query to M-centroid saved vectors
+        # d(q, x_i) = sum(j=1...m) T[j][i_j]
         dists = table[np.arange(self.M)[:, None], self._codes.T].sum(axis=0)  # (n,)
 
-        top_k = np.argpartition(dists, k - 1)[:k]
+        top_k = np.argpartition(dists, k - 1)[:k] # just a fancy way to get topk
         order = np.argsort(dists[top_k])
         top_k = top_k[order]
 
