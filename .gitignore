@@ -3,3 +3,4 @@ __pycache__/
 .venv
 plan.md
 .pytest_cache/
+examples/data/
