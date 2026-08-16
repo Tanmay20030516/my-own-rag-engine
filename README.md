@@ -22,6 +22,19 @@ A vector database implemented from scratch in Python (numpy only, no FAISS/sklea
 | `examples/real_search.py` — same benchmark on real sentence embeddings             | done                                      |
 | `examples/sweep.py` + `examples/plots.py` — hyperparameter sweep, figures, tables    | done                                      |
 | [`report.md`](report.md) / [`report.pdf`](report.pdf) — full benchmark write-up      | done                                      |
+| [`frontend/`](frontend/) — Streamlit chat UI (upload → index → ask), dockerized      | done                                      |
+
+## Web UI
+
+A chat interface over the engine: upload a document, index it with any of the
+indexes above, and ask questions answered by a local LLM from the retrieved chunks.
+
+```bash
+docker compose up --build     # open http://localhost:8501
+```
+
+See [`frontend/README.md`](frontend/README.md) for running it without Docker and
+for configuration.
 
 ## Setup
 
@@ -29,6 +42,7 @@ A vector database implemented from scratch in Python (numpy only, no FAISS/sklea
 python -m venv .venv
 source .venv/bin/activate
 pip install -r py-requirements.txt
+pip install -r frontend/requirements.txt   # only needed for the web UI
 ```
 
 RAG pipeline also needs a local [Ollama](https://ollama.com) server:

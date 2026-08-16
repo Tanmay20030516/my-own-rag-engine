@@ -68,7 +68,7 @@ class HNSWIndex(VectorIndex):
 
     def _dist(self, q: np.ndarray, idxs) -> np.ndarray:
         """Distance from a single query row (1, d) to self._vectors[idxs], as a 1-D array."""
-        return _PAIRWISE_FUNCS[self.metric](q, self._vectors[idxs])[0]
+        return _PAIRWISE_FUNCS[self.metric](q, self._vectors[idxs])[0] # type: ignore
 
     def _random_level(self) -> int:
         """Exponential-decay level assignment: most nodes land at layer 0, few reach high layers."""
@@ -135,12 +135,12 @@ class HNSWIndex(VectorIndex):
             if b not in neighbors:
                 neighbors.append(b)
             if len(neighbors) > max_degree:
-                dists = self._dist(self._vectors[a : a + 1], neighbors)
+                dists = self._dist(self._vectors[a : a + 1], neighbors) # type: ignore
                 keep = np.argsort(dists)[:max_degree]
                 self.layers[layer][a] = [neighbors[i] for i in keep]
 
     def _insert_one(self, row_idx: int) -> None:
-        q = self._vectors[row_idx : row_idx + 1]
+        q = self._vectors[row_idx : row_idx + 1] # type: ignore
         level = self._random_level()
 
         for _ in range(len(self.layers), level + 1):
