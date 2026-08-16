@@ -1,0 +1,16 @@
+# Streamlit reads this from the working directory, so it applies when the app
+# is launched from the repo root (`streamlit run frontend/app.py`) and inside
+# the container, whose WORKDIR is the repo root.
+
+[server]
+# Documents are read into memory and embedded chunk by chunk; 50 MB is well
+# past what a local Ollama embedder will get through in reasonable time.
+maxUploadSize = 50
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "dark"
+primaryColor = "#7C5CFF"

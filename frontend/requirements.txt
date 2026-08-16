@@ -1,0 +1,11 @@
+# Everything the Streamlit app needs at runtime.
+#
+# Deliberately smaller than the repo-root py-requirements.txt: the app needs
+# numpy and ollama from the engine, but not faiss/matplotlib/pytest, which
+# exist only for the benchmarks and would roughly triple the image size.
+
+numpy==2.5.1
+ollama==0.6.2
+streamlit==1.42.0
+pypdf==5.3.0
+python-docx==1.1.2

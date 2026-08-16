@@ -1,0 +1,72 @@
+# Full local stack: Ollama (embeddings + chat) and the Streamlit RAG UI.
+#
+#   docker compose up --build
+#   open http://localhost:8501
+#
+# First run downloads ~5 GB of model weights into the `ollama-models` volume.
+# They persist across restarts, so only the first `up` is slow.
+#
+# To use an Ollama server already running on your host instead of the
+# container, start only the UI and repoint it. --no-deps stops Compose from
+# also bringing up the bundled Ollama service:
+#
+#   OLLAMA_HOST=http://host.docker.internal:11434 \
+#     docker compose up rag-ui --build --no-deps
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: rag-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    healthcheck:
+      # The image has no curl/wget, but it does have the ollama CLI.
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    restart: unless-stopped
+
+  # One-shot: pulls the models the app needs, then exits. The UI waits on it
+  # so the first question doesn't fail on a missing model.
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: rag-ollama-init
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    volumes:
+      - ollama-models:/root/.ollama
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      "ollama pull ${RAG_EMBED_MODEL:-nomic-embed-text} &&
+       ollama pull ${RAG_LLM_MODEL:-qwen3:8b}"
+    restart: "no"
+
+  rag-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rag-ui
+    ports:
+      - "8501:8501"
+    environment:
+      OLLAMA_HOST: ${OLLAMA_HOST:-http://ollama:11434}
+      RAG_EMBED_MODEL: ${RAG_EMBED_MODEL:-nomic-embed-text}
+      RAG_LLM_MODEL: ${RAG_LLM_MODEL:-qwen3:8b}
+    depends_on:
+      ollama-init:
+        condition: service_completed_successfully
+    # Docker Desktop resolves host.docker.internal already; this makes the
+    # host-Ollama override work on plain Linux too.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  ollama-models:
