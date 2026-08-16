@@ -4,3 +4,4 @@ __pycache__/
 plan.md
 .pytest_cache/
 examples/data/
+context.md
